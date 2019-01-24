@@ -5,5 +5,5 @@ def add_gigasecond(moment=None):
 
     if moment is None:
         moment = datetime.datetime.now()
-    print(moment)
+
     return moment + datetime.timedelta(seconds=10**9)
