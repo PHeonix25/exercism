@@ -1,5 +1,5 @@
 import unittest
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from gigasecond import add_gigasecond
 
@@ -7,6 +7,12 @@ from gigasecond import add_gigasecond
 # Tests adapted from `problem-specifications//canonical-data.json` @ v2.0.0
 
 class GigasecondTest(unittest.TestCase):
+    def test_null_parameter_check(self):
+        self.assertAlmostEqual(
+            add_gigasecond(),
+            add_gigasecond(datetime.now()),
+            delta=timedelta(seconds=1))
+
     def test_date_only_specification_of_time(self):
         self.assertEqual(
             add_gigasecond(datetime(2011, 4, 25)),
