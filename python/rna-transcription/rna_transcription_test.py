@@ -1,4 +1,6 @@
 import unittest
+import random
+import time
 
 from rna_transcription import to_rna
 
@@ -25,6 +27,13 @@ class RnaTranscriptionTest(unittest.TestCase):
     def test_transcribes_all_occurrences(self):
         self.assertEqual(to_rna('ACGTGGTCTTAA'), 'UGCACCAGAAUU')
 
+    def test_longest_dna_string_evar(self):
+        long_string = random.choice('ACGT') * 10**9
+        print("with string length: {}".format(len(long_string)))
+        before = time.perf_counter()
+        self.assertIsNotNone(to_rna(long_string))
+        after = time.perf_counter()
+        print("Took {}sec.".format(after-before))
 
 if __name__ == '__main__':
     unittest.main()
