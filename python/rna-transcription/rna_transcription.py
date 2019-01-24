@@ -7,10 +7,6 @@ __dna_mapping__ = {
         'A':'U'
     }
 
-def dna_to_rna(dna):
-    return __dna_mapping__.get(dna, '')
-
 def to_rna(dna_strand=''):
-    """Converts a DNA strand to a matching RNA strand"""
-
-    return ''.join(dna_to_rna(char) for char in dna_strand)
+    """Converts a DNA strand to its matching RNA compliment."""
+    return ''.join(__dna_mapping__.get(char, '') for char in dna_strand)
