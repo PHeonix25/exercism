@@ -23,7 +23,14 @@ def get_groups(strand):
     return itertools.zip_longest(*args)
 
 def proteins(strand):
-    """Returns a list of the proteins contained in the strand"""
+    """Returns a list of the proteins that are in the strand using a functional approach"""
+    return list(__codons__.get(s) for s in itertools.takewhile( \
+        lambda x: __codons__.get(x) is not None, \
+        (''.join(chunk) for chunk in get_groups(strand))) \
+    )
+
+def proteins_procedural(strand):
+    """Returns a list of the proteins that are in the strand using a very procedural approach"""
     result = list()
     for breakdown in get_groups(strand):
         val = __codons__.get(''.join(breakdown))
