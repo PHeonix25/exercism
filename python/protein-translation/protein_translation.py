@@ -18,6 +18,9 @@ __codons__ = dict({
 })
 
 def proteins(strand):
+    return proteins_functional(strand)
+
+def proteins_functional(strand):
     """Returns a list of the proteins that are in the strand, using a functional approach"""
     return list(__codons__.get(protein) for protein in \
         itertools.takewhile( \
@@ -32,14 +35,11 @@ def proteins(strand):
 def proteins_procedural(strand):
     """Returns a list of the proteins that are in the strand using a very procedural approach"""
     result = list()
-    for breakdown in get_groups(strand):
-        val = __codons__.get(''.join(breakdown))
-        if val is None:
+    i = 3
+    while i <= len(strand):
+        protein = __codons__.get(strand[i-3:i])
+        if protein is None:
             return result
-        result.append(val)
-
+        result.append(protein)
+        i += 3
     return result
-
-def get_groups(strand):
-    """Returns chunks of 3 from the strand for easier comparison"""
-    return itertools.zip_longest(*([iter(strand)] * 3))
