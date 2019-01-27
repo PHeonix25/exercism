@@ -17,10 +17,10 @@ __codons__ = dict({
     "UGG":"Tryptophan"
 })
 
-def proteins(strand):
+def proteins(strand=''):
     return proteins_functional(strand)
 
-def proteins_functional(strand):
+def proteins_functional(strand=''):
     """Returns a list of the proteins that are in the strand, using a functional approach"""
     return list(__codons__.get(protein) for protein in \
         itertools.takewhile( \
@@ -32,7 +32,7 @@ def proteins_functional(strand):
                 #   providing it three times to the same function so it'll:
                 #   step, step, step, return, step, step, step, return, etc.
 
-def proteins_procedural(strand):
+def proteins_procedural(strand=''):
     """Returns a list of the proteins that are in the strand using a very procedural approach"""
     result = list()
     i = 3
