@@ -1,17 +1,18 @@
 def __is_valid(isbn):
     '''Validates the requirements around ISBN's'''
-    right_length = len(isbn) == 10
-    zonder_check = isbn[:-1]
-    check_char = isbn[-1:]
+    # Check length, this is an easy one...
+    if len(isbn) != 10:
+        return False
 
-    return right_length \
-        and (isbn.isdigit() \
-            or (zonder_check.isdigit() \
-                and check_char == 'x'))
+    # It can either be completely numeric, OR numeric + X
+    return isbn.isdigit() \
+        or (isbn[:-1].isdigit() and isbn[-1:] == 'x')
+
 
 def __val_to_int(val):
     '''Converts the provided value to an int, with X=10'''
     return int((val, 10)[val == 'x'])
+
 
 def verify(isbn=''):
     # Tidy up and standardise our input:
